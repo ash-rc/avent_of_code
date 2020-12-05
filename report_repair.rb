@@ -9,6 +9,29 @@ sorted_input.each do |first_num|
   second_num = sorted_input.bsearch { |element| search <=> element }
   next unless second_num
 
-  puts second_num * first_num
+  puts "first answer is #{second_num * first_num}"
+  break
+end
+
+sorted_input.each do |first_num|
+  boundary = 2020 - first_num
+
+  input_below_boundary = sorted_input.reject { |x| x > boundary }
+
+  second_answer = nil
+
+  input_below_boundary.each do |second_num|
+    search = boundary - second_num
+
+    third_num = sorted_input.bsearch { |element| search <=> element }
+    next unless third_num
+
+    second_answer = first_num * second_num * third_num
+    break
+  end
+
+  next unless second_answer
+
+  puts "second answer is #{second_answer}"
   break
 end
